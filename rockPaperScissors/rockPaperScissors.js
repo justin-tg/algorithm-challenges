@@ -17,8 +17,8 @@ Write a function that generates every sequence of throws a single player could t
 Speficication:
 i: a number
 o:  an array containing elements of all possible RPS throw combinations
-c:
-e:
+c: must return an array (not a set), and its elements must be strings
+e: input is 1 then return the rps array, if the input 0 then return empty array
 justification: the purpose of the function is to generate a list of all possibilities that could happen in a game of n rounds
 explaination: the input is an integer or nothing and the output is array containing elements of all possible RPS throw combinations
 visualization: created a visual on miro.com
@@ -29,49 +29,50 @@ implementation: with three loops I was able to get 20 out of the 27 possible com
 
 
 var rockPaperScissors = function (number) {
-  //create an empty string var
-  var combo1, combo2, combo3, combo4;
-  //create an RPS array
+  //create an RPS and SRP array
   var rpsArray = ['R', 'P', 'S'];
   var srpArray = ['S', 'R', 'P'];
+  //Edge Cases
   if (number === 1) {
     return rpsArray;
+  } else if (number <= 0) {
+    return [];
   }
   //create an empty result array
-  var resultArr = [];
+  var pushArray = [];
   //iterate through the RPS array with a for loop [i]
   for (var i = 0; i < rpsArray.length - 1; i++) {
+    var r = rpsArray[i];
     //iterate through the RPS array with a for loop [j]
     for (var j = 0 ; j < rpsArray.length - 1; j++) {
+      var p = rpsArray[j];
       //iterate through the RPS array with a for loop [k]
       for (var k = 0; k < rpsArray.length; k++) {
+        var s = rpsArray[k];
       //concat the array at i plus the array at j plus the array at k into the result array
-      combo1 = `${rpsArray[i]}` + `${rpsArray[j]}` + `${rpsArray[k]}`;
-      resultArr.push(combo1);
-      combo2 = `${rpsArray[j]}` + `${rpsArray[k]}` + `${rpsArray[i]}`;
-      resultArr.push(combo2);
-      combo3 = `${rpsArray[k]}` + `${rpsArray[i]}` + `${rpsArray[j]}`;
-      resultArr.push(combo3);
+      pushArray.push(r + p + s);
+      pushArray.push(p + s + r);
+      pushArray.push(s + r + p);
       }
     }
   }
   for (var i = 0; i < srpArray.length - 1; i++) {
+    var r = srpArray[i];
     //iterate through the RPS array with a for loop [j]
     for (var j = 0 ; j < srpArray.length - 1; j++) {
+      var p = srpArray[j];
       //iterate through the RPS array with a for loop [k]
       for (var k = 0; k < srpArray.length; k++) {
+        var s = srpArray[k];
       //concat the array at i plus the array at j plus the array at k into the result array
-      combo1 = `${srpArray[i]}` + `${srpArray[j]}` + `${srpArray[k]}`;
-      resultArr.push(combo1);
-      combo2 = `${srpArray[j]}` + `${srpArray[k]}` + `${srpArray[i]}`;
-      resultArr.push(combo2);
-      combo3 = `${srpArray[k]}` + `${srpArray[i]}` + `${srpArray[j]}`;
-      resultArr.push(combo3);
+      pushArray.push(r + p + s);
+      pushArray.push(p + s + r);
+      pushArray.push(s + r + p);
       }
     }
   }
   // console.log(resultArr);
-  var mySet = new Set(resultArr);
+  var mySet = new Set(pushArray);
   var array = Array.from(mySet);
   return array;
 };
