@@ -17,7 +17,7 @@ Write a function that generates every sequence of throws a single player could t
 Speficication:
 i: a number
 o:  an array containing elements of all possible RPS throw combinations
-c: 
+c:
 e:
 justification: the purpose of the function is to generate a list of all possibilities that could happen in a game of n rounds
 explaination: the input is an integer or nothing and the output is array containing elements of all possible RPS throw combinations
@@ -28,17 +28,20 @@ implementation: with three loops I was able to get 20 out of the 27 possible com
 */
 
 
-var rockPaperScissors = function () {
+var rockPaperScissors = function (number) {
   //create an empty string var
   var combo1, combo2, combo3, combo4;
   //create an RPS array
   var rpsArray = ['R', 'P', 'S'];
   var srpArray = ['S', 'R', 'P'];
+  if (number === 1) {
+    return rpsArray;
+  }
   //create an empty result array
   var resultArr = [];
-  //iterate through the RPS array with a for loop [i] 
+  //iterate through the RPS array with a for loop [i]
   for (var i = 0; i < rpsArray.length - 1; i++) {
-    //iterate through the RPS array with a for loop [j] 
+    //iterate through the RPS array with a for loop [j]
     for (var j = 0 ; j < rpsArray.length - 1; j++) {
       //iterate through the RPS array with a for loop [k]
       for (var k = 0; k < rpsArray.length; k++) {
@@ -53,7 +56,7 @@ var rockPaperScissors = function () {
     }
   }
   for (var i = 0; i < srpArray.length - 1; i++) {
-    //iterate through the RPS array with a for loop [j] 
+    //iterate through the RPS array with a for loop [j]
     for (var j = 0 ; j < srpArray.length - 1; j++) {
       //iterate through the RPS array with a for loop [k]
       for (var k = 0; k < srpArray.length; k++) {
@@ -68,11 +71,13 @@ var rockPaperScissors = function () {
     }
   }
   // console.log(resultArr);
-  return new Set(resultArr);
+  var mySet = new Set(resultArr);
+  var array = Array.from(mySet);
+  return array;
 };
 
 //TEST SUITE
-console.log('function invokation: ', rockPaperScissors());
+console.log(rockPaperScissors());
 /*
 0: "RRR"
 1: "RRP"
