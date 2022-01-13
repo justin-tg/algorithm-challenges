@@ -5,30 +5,72 @@
 */
 
 /*
- * example usage:
- * var onlyEven = evenOccurrence([1, 7, 2, 4, 5, 6, 8, 9, 6, 4]);
- * console.log(onlyEven); //  4
+prompt: write a function evenOccurrence given a input array that returns the first item in the array that occurs an even amount of times
+i: array of numbers
+o:  a number
+c: handle multiple even-occurrence items and return the first one
+e: input is not an array, an empty arr or no even occurances return null
+purpose: find the first number in a list of numbers that occurs an even amount of times (and is the lowest number?)
+relation i to o: input is an array output is one of the elements of the array
+visual: miro
+steps: refer to pseudocode
+implementation: refer to code
 */
 
-
-
 var evenOccurrence = function(arr) {
+  //if the input isnt an array return null
+  if (!Array.isArray(arr)) {
+    return null;
+  }
+  //create an object to add each array element to with a corresponding value for its occurrences
   var myObj = {};
+  //iterate through the input array
   arr.forEach(function(item) {
+    //if the current number is already in the obj then add one to its value property
     if (myObj[item] !== undefined) {
       myObj[item] = myObj[item] + 1;
+    //otherwise the current number hasn't occured yet, so set its value equal to 1
     } else {
       myObj[item] = 1;
     }
   });
+  //iterate through the obj or all the keys (numbers) and their corresponding occurrences value prop
   for (var key in myObj) {
-    if (myObj[key] === 2) {
+    //if the current number's property is cleanly divisible by 2
+    if (myObj[key] % 2 === 0) {
+      //that number has even occurances so return that key (number)
       return key;
     }
   }
+  //if none of the numbers had even occurances then return null
+  return null;
 };
 
 
 //TEST SUITE
 var onlyEven = evenOccurrence([1, 7, 2, 4, 7, 5, 6, 8, 9, 6, 4]);
-console.log('should return 4: ', onlyEven); //  4
+console.log('test 1 should return 4: ', onlyEven); //  4
+
+var test2 = [1, 2, 3, 4, 5, 6, 7, 7, 7, 5];
+var onlyEven = evenOccurrence(test2);
+console.log('test 2 should return 5: ', evenOccurrence(test2));
+
+var test3 = [1, 7, 4, 7, 4, 6, 1];
+var onlyEven = evenOccurrence(test3);
+console.log('test 3 should return 1: ', evenOccurrence(test3));
+
+var test4 = [1, 2, 2, 4, 5, 6, 7, 8, 4, 4, 2, 3, 2];
+var onlyEven = evenOccurrence(test4);
+console.log('test 4 should return 2: ', evenOccurrence(test4));
+
+var test5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var onlyEven = evenOccurrence(test5);
+console.log('test 5 should return null no even occurrences: ', evenOccurrence(test5));
+
+var test6 = [];
+var onlyEven = evenOccurrence(test6);
+console.log('test 6 should return null empty input arr: ', evenOccurrence(test6));
+
+var test7 = 10;
+var onlyEven = evenOccurrence(test7);
+console.log('test 7 should return null invalid input type: ', evenOccurrence(test7));
