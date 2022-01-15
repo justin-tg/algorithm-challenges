@@ -24,6 +24,7 @@ var evenOccurrence = function(arr) {
   }
   //create an object to add each array element to with a corresponding value for its occurrences
   var myObj = {};
+  var orderToCheck = [];
   //iterate through the input array
   arr.forEach(function(item) {
     //if the current number is already in the obj then add one to its value property
@@ -32,14 +33,16 @@ var evenOccurrence = function(arr) {
     //otherwise the current number hasn't occured yet, so set its value equal to 1
     } else {
       myObj[item] = 1;
+      orderToCheck.push(item);
     }
   });
-  //iterate through the obj or all the keys (numbers) and their corresponding occurrences value prop
-  for (var key in myObj) {
+  //iterate through the orderToCheck array
+  for (var order of orderToCheck) {
     //if the current number's property is cleanly divisible by 2
-    if (myObj[key] % 2 === 0) {
+    if (myObj[order] % 2 === 0) {
       //that number has even occurances so return that key (number)
-      return key;
+
+      return order;
     }
   }
   //if none of the numbers had even occurances then return null
@@ -49,7 +52,7 @@ var evenOccurrence = function(arr) {
 
 //TEST SUITE
 var test1 = [1, 7, 2, 4, 7, 5, 6, 8, 9, 6, 4];
-console.log('test 1 should return 4: ', evenOccurrence(test1);); //  4
+console.log('test 1 should return 4: ', evenOccurrence(test1)); //  4
 
 var test2 = [1, 2, 3, 4, 5, 6, 7, 7, 7, 5];
 console.log('test 2 should return 5: ', evenOccurrence(test2));
@@ -78,4 +81,8 @@ console.log('test 8 should return meow: ', evenOccurrence(test8));
 //evenOccurrence should return the first even occurrence of an array of numbers
 // AssertionError: expected '2' to equal 2
 var test9 = [1, 3, 3, 3, 2, 4, 4, 2, 5];
-console.log('test 9 should return 2: ', evenOccurrence(test9));
+console.log('test 9 should return 2: ', typeof evenOccurrence(test9));
+
+//'<%- username %>'
+//renders the char as a string without running the script
+//use underscore escape function here https://www.geeksforgeeks.org/underscore-js-_-escape-function/
