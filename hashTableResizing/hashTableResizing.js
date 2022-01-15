@@ -38,7 +38,7 @@ var makeHashTable = function() {
   var storage = [];
   var storageLimit = 4;
   var size = 0;
-  
+
   result.insert = function(key, value) {
     // TODO: implement `insert`
     //if you add then add one to the size
