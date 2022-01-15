@@ -85,3 +85,28 @@ console.log('test 3 using pop - size should be 3', test3.size());
 
 
 //working on: figure out how to change the min value to point to the right value given constant time complexity when the min value is removed from the top of the stack
+
+//FAILING 2 TESTS
+// Stack constructor should return an instance of a stack
+// AssertionError: expected { Object (top, minimum, ...) } to be an instance of Stack
+function () {
+  var stack = new Stack(); // aka, `stack instanceof Stack` is returning false, but it should be true!
+  stack.should.be.an.instanceOf(Stack);
+}
+
+// Stack #min should return the min of all the elements in the stack
+// AssertionError: expected 100 to equal 200
+function () {
+      var stack = new Stack();
+      stack.push(200); // we just added an element so the stack's min should be 200
+      stack.min().should.be.equal(200);
+      stack.push(100); // we just added _another_ element and the stack's min should now be 100
+      stack.min().should.be.equal(100);
+      stack.pop(); // we just removed an element so the stack's min should be 200 again
+      stack.min().should.be.equal(200);
+      stack.push(50);
+      stack.push(50); // we just added _another_ element and the stack's min should now be 50
+      stack.min().should.be.equal(50); // even if we pop the lowest value, the stack should remember duplicates
+      stack.pop();
+      stack.min().should.be.equal(50);
+    }

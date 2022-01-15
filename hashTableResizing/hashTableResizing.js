@@ -140,3 +140,87 @@ console.log(hashTable.insert);
 console.log(hashTable.remove);
 console.log(hashTable.retrieve);
 console.log(hashTable.storageResizer);
+
+//FAILING TESTS
+//hashTable should be able to resize
+//AssertionError: expected 0 to be above 0.05
+
+//1
+function () {
+  // If your hashtable isn't resizing, its going to start running more and more slowly with a large number of inserts and retrievals.
+  var hashTable = makeHashTable();
+  var n = 10;
+  var id = 0;
+  var diffs = [];
+  var endTime;
+  var startTime;
+  for (var i = 0; i <= n; i++) {
+    startTime = new Date();
+    for (var j = 0; j < 1000; j++) {
+      hashTable.insert('userid:' + id++, 'Syd Mead');
+    }
+    for (j = 0; j < 100; j++) {
+      hashTable.retrieve('userid:' + Math.floor(Math.random() * i));
+    }
+    endTime = new Date();
+    diffs.push(endTime - startTime);
+  }
+  var sum = function sum(arr) {
+    var total = 0;
+    for (var i = 0; i < arr.length; i++) {
+      total += arr[i];
+    }
+    return total;
+  };
+  // We should expect the first iteration to take up roughly 1 / n of the total time. We give it some wiggle room by letting it be as low as a 1 / (n*2) of the total duration
+  var ratio = diffs[0] / sum(diffs);
+  ratio.should.be.above(1 / (n * 2));
+}
+
+//2
+//hashTable #insert should take exactly two arguments. a key and a value
+//AssertionError: expected 0 to equal 2
+function () {
+  var hashTable = makeHashTable();
+  hashTable.insert.length.should.equal(2);
+  //A Hash Table gets its awesomeness from associating data. It wouldn't be very useful if you just gave it data without any association
+}
+
+//3
+//hashTable #retrieve should take exactly one argument
+//AssertionError: expected 0 to equal 1
+function () {
+  var hashTable = makeHashTable(); // the retrieve function should only take a single `key` argument
+  hashTable.retrieve.length.should.equal(1);
+}
+
+//4
+//hashTable #retrieve should return values previously inserted
+//AssertionError: expected undefined to exist
+function () {
+  var hashTable = makeHashTable();
+  hashTable.insert('William Shatner\'s most well known role', 'Captain Kirk');
+  var value = hashTable.retrieve('William Shatner\'s most well known role');
+  should.exist(value);
+  value.should.be.equal('Captain Kirk');
+}
+
+//5
+//hashTable #insert should allow valus to be updated
+//AssertionError: expected undefined to exist
+function () {
+  var hashTable = makeHashTable();
+  hashTable.insert('Tarantino\'s best movie', 'Jackie Brown');
+  hashTable.insert('Tarantino\'s best movie', 'Pulp Fiction');
+  var value = hashTable.retrieve('Tarantino\'s best movie');
+  should.exist(value);
+  value.should.be.equal('Pulp Fiction');
+}
+
+//6
+// hashTable #remove should take exactly one argument
+//AssertionError: expected 0 to equal 1
+function () {
+  var hashTable = makeHashTable(); // the remove function should only take a single `key` argument
+  hashTable.remove.length.should.equal(1);
+}

@@ -48,29 +48,34 @@ var evenOccurrence = function(arr) {
 
 
 //TEST SUITE
-var onlyEven = evenOccurrence([1, 7, 2, 4, 7, 5, 6, 8, 9, 6, 4]);
-console.log('test 1 should return 4: ', onlyEven); //  4
+var test1 = [1, 7, 2, 4, 7, 5, 6, 8, 9, 6, 4];
+console.log('test 1 should return 4: ', evenOccurrence(test1);); //  4
 
 var test2 = [1, 2, 3, 4, 5, 6, 7, 7, 7, 5];
-var onlyEven = evenOccurrence(test2);
 console.log('test 2 should return 5: ', evenOccurrence(test2));
 
 var test3 = [1, 7, 4, 7, 4, 6, 1];
-var onlyEven = evenOccurrence(test3);
 console.log('test 3 should return 1: ', evenOccurrence(test3));
 
 var test4 = [1, 2, 2, 4, 5, 6, 7, 8, 4, 4, 2, 3, 2];
-var onlyEven = evenOccurrence(test4);
 console.log('test 4 should return 2: ', evenOccurrence(test4));
 
 var test5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var onlyEven = evenOccurrence(test5);
 console.log('test 5 should return null no even occurrences: ', evenOccurrence(test5));
 
 var test6 = [];
-var onlyEven = evenOccurrence(test6);
 console.log('test 6 should return null empty input arr: ', evenOccurrence(test6));
 
 var test7 = 10;
-var onlyEven = evenOccurrence(test7);
 console.log('test 7 should return null invalid input type: ', evenOccurrence(test7));
+
+//FAILING (2) TESTS
+// evenOccurrence should return the first even occurrence of a mixed array
+// AssertionError: expected '1' to equal 'meow'
+var test8 = ['meow', 1, 1, 'meow', 'meow', 'meow'];
+console.log('test 8 should return meow: ', evenOccurrence(test8));
+
+//evenOccurrence should return the first even occurrence of an array of numbers
+// AssertionError: expected '2' to equal 2
+var test9 = [1, 3, 3, 3, 2, 4, 4, 2, 5];
+console.log('test 9 should return 2: ', evenOccurrence(test9));

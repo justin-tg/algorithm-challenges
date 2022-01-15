@@ -28,54 +28,76 @@ implementation: with three loops I was able to get 20 out of the 27 possible com
 */
 
 
-var rockPaperScissors = function (number) {
-  //create an RPS and SRP array
-  var rpsArray = ['R', 'P', 'S'];
-  var srpArray = ['S', 'R', 'P'];
-  //Edge Cases
-  if (number === 1) {
-    return rpsArray;
-  } else if (number <= 0) {
-    return [];
-  }
-  //create an empty result array
-  var pushArray = [];
-  //iterate through the RPS array with a for loop [i]
-  for (var i = 0; i < rpsArray.length - 1; i++) {
-    var r = rpsArray[i];
-    //iterate through the RPS array with a for loop [j]
-    for (var j = 0 ; j < rpsArray.length - 1; j++) {
-      var p = rpsArray[j];
-      //iterate through the RPS array with a for loop [k]
-      for (var k = 0; k < rpsArray.length; k++) {
-        var s = rpsArray[k];
-      //concat the array at i plus the array at j plus the array at k into the result array
-      pushArray.push(r + p + s);
-      pushArray.push(p + s + r);
-      pushArray.push(s + r + p);
-      }
+// var rockPaperScissors = function (number) {
+//   //create an RPS and SRP array
+//   var rpsArray = ['R', 'P', 'S'];
+//   var srpArray = ['S', 'R', 'P'];
+//   //Edge Cases
+//   if (number === 1) {
+//     return rpsArray;
+//   } else if (number <= 0) {
+//     return [];
+//   }
+//   //create an empty result array
+//   var pushArray = [];
+//   //iterate through the RPS array with a for loop [i]
+//   for (var i = 0; i < rpsArray.length - 1; i++) {
+//     var r = rpsArray[i];
+//     //iterate through the RPS array with a for loop [j]
+//     for (var j = 0 ; j < rpsArray.length - 1; j++) {
+//       var p = rpsArray[j];
+//       //iterate through the RPS array with a for loop [k]
+//       for (var k = 0; k < rpsArray.length; k++) {
+//         var s = rpsArray[k];
+//       //concat the array at i plus the array at j plus the array at k into the result array
+//       pushArray.push(r + p + s);
+//       pushArray.push(p + s + r);
+//       pushArray.push(s + r + p);
+//       }
+//     }
+//   }
+//   for (var i = 0; i < srpArray.length - 1; i++) {
+//     var r = srpArray[i];
+//     //iterate through the RPS array with a for loop [j]
+//     for (var j = 0 ; j < srpArray.length - 1; j++) {
+//       var p = srpArray[j];
+//       //iterate through the RPS array with a for loop [k]
+//       for (var k = 0; k < srpArray.length; k++) {
+//         var s = srpArray[k];
+//       //concat the array at i plus the array at j plus the array at k into the result array
+//       pushArray.push(r + p + s);
+//       pushArray.push(p + s + r);
+//       pushArray.push(s + r + p);
+//       }
+//     }
+//   }
+//   // console.log(resultArr);
+//   var mySet = new Set(pushArray);
+//   var array = Array.from(mySet);
+//   return array;
+// };
+
+var rockPaperScissors = function (rounds) {
+  var rounds = rounds || 3;
+  var combos = [];
+
+  var playRounds = function (playedSoFar) {
+    playedSoFar =  playedSoFar || '';
+    if (playedSoFar.length === rounds) {
+      combos.push(playedSoFar);
+      return;
     }
-  }
-  for (var i = 0; i < srpArray.length - 1; i++) {
-    var r = srpArray[i];
-    //iterate through the RPS array with a for loop [j]
-    for (var j = 0 ; j < srpArray.length - 1; j++) {
-      var p = srpArray[j];
-      //iterate through the RPS array with a for loop [k]
-      for (var k = 0; k < srpArray.length; k++) {
-        var s = srpArray[k];
-      //concat the array at i plus the array at j plus the array at k into the result array
-      pushArray.push(r + p + s);
-      pushArray.push(p + s + r);
-      pushArray.push(s + r + p);
-      }
-    }
-  }
-  // console.log(resultArr);
-  var mySet = new Set(pushArray);
-  var array = Array.from(mySet);
-  return array;
+
+    ['R', 'P', 'S'].forEach(function myFunc(currentPlay) {
+      playRounds(playedSoFar + currentPlay);
+    });
+  };
+
+  playRounds();
+  return combos;
 };
+
+rockPaperScissors(3)
 
 //TEST SUITE
 console.log(rockPaperScissors());
