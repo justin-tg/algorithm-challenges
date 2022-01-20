@@ -52,7 +52,12 @@ stackMethods.size = function() {
 
 // return the minimum value in the stack
 stackMethods.min = function() {
-  return this.minimum;
+  var numsArr = Object.values(stack);
+  for (var num of numsArr) {
+    if (this.min < num) {
+      return this.min
+    }
+  }
 };
 
 //TEST SUITE
