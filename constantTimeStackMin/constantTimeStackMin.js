@@ -13,6 +13,7 @@ var Stack = function() {
   result.top = 0;
   result.minimum = 10000000000000000;
   result.prevMin = 999;
+  result.minStack = new Stack();
   return result;
 };
 
@@ -20,6 +21,10 @@ var stackMethods = {};
 
 // add an item to the top of the stack and inc the top by 1
 stackMethods.push = function(value) {
+  //if the minStack is empty or the value is less than the top value
+  if (this.minStack[this.top])
+
+    //then set the top value of the min stack to the value
   if (value < this.minimum) {
     this.preMin = this.minimum;
     this.minimum = value;

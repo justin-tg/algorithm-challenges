@@ -1,4 +1,4 @@
-/**
+/*
  * Implement a function that sorts an array of numbers using the "mergesort" algorithm.
  *
  * Mergesort is an optimized sorting algorithm which is a common choice to implement `sort`
@@ -92,11 +92,59 @@
  *   data will have "runs" of sorted integers. The "natural mergesort" takes advantage of this by splitting
  *   the input not into sublists of length 1, but into whatever sublists are already sorted in the input.
  *   Implement natural splitting into your mergesort. How much does it improve your average-case runtime?
- *
+
+prompt: make a mergesort function
+i: an array of varying length
+o: the input array sorted
+c: an array that doesnt contain integers
+e: if the array is empty or only has one elemnt in it return the array
+justification: return a sorted array
+visualization: refer to miro design
+approximation: refer to pseudo code
+implementation: refer to code
  */
 
-
-
 var mergeSort = function(array) {
-  // Your code here.
+  //Edge case of a small array
+  if (array.length < 2) {
+    return array;
+  }
+  //[3, 6, 2, 8, 5]
+  //split the given list into two halves(rougly equal halves in case of an odd length input array)
+  let half = Math.floor(array.length / 2)
+  //2
+  let left = array.slice(0, half);
+  //[3, 6]
+  let right = array.slice(half, array.length);
+  //[8, 5]
+  //[5, 8]
+  //repeat concatenating and sorting subarrays until you reach single sorted array
+  return merge(mergeSort(left), mergeSort(right));
 };
+
+function merge(leftArray, rightArray) {
+  let resultArr = []; //[3, 6] + [] + [8, 5]
+  //continue dividing subarrays in the same manner until you are left with only single element arrays
+  //if either array becomes empty then end the loop
+  while (leftArray.length && rightArray.length) {
+    // concatnate the subarrays so that each merged subarray is sorted from lowest to highet
+    //if the first num in the left array is les than the first value in the right array
+    if (leftArray[0] < rightArray[0]) {
+      //add the left num to the result array and remove that num from the left array
+      resultArr.push(leftArray.shift())
+    } else {
+      //add the right num to the result array and remove that num from the right array
+      resultArr.push(rightArray.shift())
+    }
+  }
+  var finalArr = [...resultArr, ...leftArray, ...rightArray];
+  return finalArr;
+}
+
+//TEST SUITE
+let test1 = mergeSort([4, 1, 6, 8, 9, 0, 3]);
+console.log('should be [0, 1, 3, 4, 6, 8, 9', test1);
+
+let test2 = mergeSort([7, 4, 6, 2, 9, 0, 1, 5]);
+console.log('should be [0, 1, 2, 4, 5, 6, 7, 9]: ', test2);
+
