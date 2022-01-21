@@ -13,7 +13,6 @@ var Stack = function() {
   result.top = 0;
   result.minimum = 10000000000000000;
   result.prevMin = 999;
-  result.minStack = new Stack();
   return result;
 };
 
