@@ -296,13 +296,13 @@ var makeHashTable = function() {
       storageLimit = newSize;
       storage = [];
       size = 0;
-    }
 
-    buckets.forEach(function(bucket){
-      bucket.forEach(function(tuple){
-        result.insert(tuple[0], tuple[1]);
+      buckets.forEach(function(bucket){
+        bucket.forEach(function(tuple){
+          result.insert(tuple[0], tuple[1]);
+        });
       });
-    });
+    }
     resizing = false;
   }
 

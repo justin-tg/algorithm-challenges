@@ -33,7 +33,7 @@
 // insertionSort([{value: 2}, {value: 1}, {value: 3}]);
 // yields [{value: 1}, {value: 2}, {value: 3}]
 
-// This function is to help you test, and should not be incorporated in your solution.
+// This function is to help you test, and should not be incorporated in your solution
 // It will transform an array of numbers into an array of valid objects.
 var testingTransform = function(array) {
   var transform = [];

@@ -45,7 +45,7 @@ var evenOccurrence = function(arr) {
       return order;
     }
   }
-  //if none of the numbers had even occurances then return null
+  //if none of the numbers had even occurances then return
   return null;
 };
 

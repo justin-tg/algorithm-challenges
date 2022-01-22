@@ -133,7 +133,7 @@ function merge(leftArray, rightArray) {
       //add the left num to the result array and remove that num from the left array
       resultArr.push(leftArray.shift())
     } else {
-      //add the right num to the result array and remove that num from the right array
+      //add the right num to the result array and remove that num from the right arr
       resultArr.push(rightArray.shift())
     }
   }
