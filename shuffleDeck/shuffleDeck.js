@@ -31,8 +31,27 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
+ var randomNum = function(min, max) {
+  return Math.floor(min + Math.random() * max);
+}
+
 var shuffleDeck = function(deck) {
-  // Your code here
+  // Given an array containing a random number of elements return an array that has randomly been rearranged
+  var deckCopy = deck.slice();
+  let resultArr = [];
+  var index;
+  while (deckCopy.length !==0 ) {
+    for (var num of deckCopy) {
+      //generate a random number between 0 and the length of the deck
+      index = randomNum(0, deckCopy.length)
+      //add the number at that index to the resultArr
+      resultArr.push(deckCopy[index]);
+      //remove that number from the deckCopy
+      deckCopy.splice(index, 1);
+      console.log('deck after splice: ', deckCopy.length);
+    }
+  }
+  return resultArr;
 };
 
 // Ordered deck generator provided for your testing convenience
@@ -50,3 +69,6 @@ var orderedDeck = function() {
 
   return deck;
 };
+
+console.log(orderedDeck());
+console.log(shuffleDeck(orderedDeck()));

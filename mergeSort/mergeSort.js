@@ -148,3 +148,4 @@ console.log('should be [0, 1, 3, 4, 6, 8, 9', test1);
 let test2 = mergeSort([7, 4, 6, 2, 9, 0, 1, 5]);
 console.log('should be [0, 1, 2, 4, 5, 6, 7, 9]: ', test2);
 
+//done working on mergesort
