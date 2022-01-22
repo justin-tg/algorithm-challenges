@@ -48,7 +48,6 @@ var shuffleDeck = function(deck) {
       resultArr.push(deckCopy[index]);
       //remove that number from the deckCopy
       deckCopy.splice(index, 1);
-      console.log('deck after splice: ', deckCopy.length);
     }
   }
   return resultArr;
@@ -70,5 +69,5 @@ var orderedDeck = function() {
   return deck;
 };
 
-console.log(orderedDeck());
-console.log(shuffleDeck(orderedDeck()));
+console.log('should be the ordered deck: ', orderedDeck());
+console.log('should be the shuffled deck: ', shuffleDeck(orderedDeck()));

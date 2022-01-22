@@ -137,8 +137,7 @@ function merge(leftArray, rightArray) {
       resultArr.push(rightArray.shift())
     }
   }
-  var finalArr = [...resultArr, ...leftArray, ...rightArray];
-  return finalArr;
+  return [...resultArr, ...leftArray, ...rightArray];
 }
 
 //TEST SUITE
