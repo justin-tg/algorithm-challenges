@@ -17,7 +17,7 @@
   if (!typeof string === 'string' || !string) {
     return null;
   } else if (string.length < 2) {
-    return string;
+    return `['${string}']`;
   }
   //RECURSIVE CASE
   var resultArr = [];
@@ -29,15 +29,19 @@
       resultArr.push(letter + combo)
     }
   }
-  return resultArr;
+  var set = new Set(resultArr);
+  return set;
 };
 
 //TEST SUITE
 var test1 = allAnagrams('abc');
 console.log(`should be: ${[ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]}: `, test1);
 
-var test2 = allAnagrams('justin');
+var test2 = allAnagrams('ow');
 console.log(test2);
 
 var test3 = allAnagrams('aabc');
 console.log(test3);
+
+var test4 = allAnagrams('a');
+console.log(`should be ['a']`, test4);
