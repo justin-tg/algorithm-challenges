@@ -29,9 +29,10 @@
       resultArr.push(letter + combo)
     }
   }
-  var set = new Set(resultArr);
-  let returnArray = Array.from(set);
-  return returnArray;
+  return resultArr;
+  // var set = new Set(resultArr);
+  // let returnArray = Array.from(set);
+  // return returnArray;
 };
 
 //TEST SUITE
