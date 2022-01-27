@@ -30,7 +30,8 @@
     }
   }
   var set = new Set(resultArr);
-  return set;
+  let returnArray = Array.from(set);
+  return returnArray;
 };
 
 //TEST SUITE
