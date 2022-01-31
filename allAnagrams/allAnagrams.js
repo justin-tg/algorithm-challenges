@@ -17,7 +17,7 @@
   if (!typeof string === 'string' || !string) {
     return null;
   } else if (string.length < 2) {
-    return [`'${string}'`];
+    return [string];
   }
   //RECURSIVE CASE
   var resultArr = [];
