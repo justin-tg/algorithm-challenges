@@ -14,18 +14,27 @@ In England the currency is made up of pound, £, and pence, p, and there are eig
 It is possible to make £2 in the following way:
 
 1 * £1 + 1 * 50p + 2 * 20p + 1 * 5p + 1 * 2p + 3 * 1p
-How many different ways can £2 be made using any number of coins?
-
-example usage of `makeChange`:
-
-// aka, there's only one way to make 1p. that's with a single 1p piece
-makeChange(1) === 1
-// aka, there's only two ways to make 2p. that's with two, 1p pieces or with a single 2p piece
-makeChange(2) === 2
+Prompt: How many different ways can £2 be made using any number of coins?
+I: takes in a number
+o: returns a number of all possible combinations of coins that can sum to that number
+c:
+e: input is 0 or negative
+explanation: the input is an amount in p (cents) and the output is a whole num of all possible coin combinations
+approximation: recursion tree
+vis: miro
+impl:
 */
 
 var makeChange = function(total) {
 
 };
 
+//TEST SUITE
+var test1 = makeChange(1);
+console.log('should be 1: ', test1);
 
+var test2 = makeChange(2);
+console.log('should be 2: ', 2);
+
+var test3 = makeChange(3);
+console.log('should be ??: ', test3);
