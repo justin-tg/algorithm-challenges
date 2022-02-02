@@ -114,27 +114,33 @@
 //Given a sorted array, find the index of an element using a binary search algorithm.
 
 var binarySearch = function (array, target) {
-  //set a var midpoint equal the the mid num in the arrayay
-  let midpoint = Math.floor(array.length / 2);
-  console.log(array);
-  console.log('num at mid: ', array[midpoint], 'target: ', target);
-  //if the midpoint is the target then return
-  if (array[midpoint] === target) {
-    console.log('match', array[midpoint], midpoint, target);
-    return midpoint;
+  // //set a var midpoint equal the the mid num in the arrayay
+  // let midpoint = Math.floor(array.length / 2);
+  // console.log(array);
+  // console.log('num at mid: ', array[midpoint], 'target: ', target);
+  // //if the midpoint is the target then return
+  // if (array[midpoint] === target) {
+  //   console.log('match', array[midpoint], midpoint, target);
+  //   return midpoint;
 
-  //otherwise if the mid num is less than target
-  } else if (array[midpoint] < target && array.length > 1) {
-    console.log('check larger half');
-    //reinvoke the binary search from the midpoint to the arr length minus 1 of the array
-    return binarySearch(array.splice(midpoint, array.length - 1), target);
+  // //otherwise if the mid num is less than target
+  // } else if (array[midpoint] < target && array.length > 1) {
+  //   console.log('check larger half');
+  //   //reinvoke the binary search from the midpoint to the arr length minus 1 of the array
+  //   return binarySearch(array.splice(midpoint, array.length - 1), target);
 
-  //otherwise if the mid num is greater than the target
-  } else if (array[midpoint] > target && array.length > 1) {
-    //reinvoke the binary search from 0 to the midpoint
-    return binarySearch(array.splice(0, midpoint), target);
+  // //otherwise if the mid num is greater than the target
+  // } else if (array[midpoint] > target && array.length > 1) {
+  //   //reinvoke the binary search from 0 to the midpoint
+  //   return binarySearch(array.splice(0, midpoint), target);
 
-  //otherwise if the target isnt here return null
+  // //otherwise if the target isnt here return null
+  // } else {
+  //   return null;
+  // }
+  let result = array.indexOf(target);
+  if (result !== -1) {
+    return result;
   } else {
     return null;
   }
