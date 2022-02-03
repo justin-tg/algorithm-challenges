@@ -1,12 +1,8 @@
 
-/**
-  * Implement the `countLeaves` function in this Tree class.
-  *
+/* Implement the `countLeaves` function in this Tree class.
   * A leaf node is any node in the tree that has no children. `countLeaves` should
   * traverse the tree, and return the number of leaf nodes the tree contains.
-  *
   * Illustration of a tree with three leaves:
-  *
   *       * <- root
   *      / \
   *     *    * <- leaf
@@ -14,41 +10,43 @@
   *   *   * <- leaf
   *  /
   * * <- leaf
-  *
-  * Example usage:
-  *   var root = new Tree();
-  *   root.countLeaves(); // 1
-  *   root.addChild(new Tree());
-  *   root.countLeaves(); // still 1
-  *   root.addChild(new Tree());
-  *   root.children[0].addChild(new Tree());
-  *   root.children[0].addChild(new Tree());
-  *   root.children[0].children[0].addChild(new Tree());
-  *   root.countLeaves(); // 3
-  *
-  */
+*/
 
-/*
- * Basic tree that stores a value.
- */
-
+//Basic tree that stores a value
 var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
 
 Tree.prototype.countLeaves = function () {
-  // TODO: implement me!
-};
+  let leaves = 0;
+  let innerFunc = (node) => {
+    // if the node has kids
+    if (node.children.length) {
+      //iterate through the children nodes and invoke each child to the recur func
+      node.children.forEach((eachChild) => {
+        innerFunc(eachChild);
+      });
+    //otherwise if the node doesn't have kids
+    } else {
+      //it's the last of it's kind so add one to leaves count
+      leaves++;
+    }
+  }
+  //invoke innerfunc to the root/head of the tree
+  console.log(this);
+  innerFunc(this.value)
+  return leaves;
+}
 
-/**
-  * You shouldn't need to change anything below here, but feel free to look.
-  */
+//TEST SUITE
 
-/**
-  * add an immediate child
-  * (wrap values in Tree nodes if they're not already)
-  */
+//You shouldn't need to change anything below here, but feel free to look.
+
+
+//TREE addchild method
+  // * add an immediate child
+  // * (wrap values in Tree nodes if they're not already)
 Tree.prototype.addChild = function(child) {
   if (!child || !(child instanceof Tree)) {
     child = new Tree(child);
@@ -94,3 +92,20 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+
+//TEST SUITE
+let root = new Tree();
+root.countLeaves(); // 1
+console.log('should be 1: ', root.countLeaves());
+
+root.addChild(new Tree());
+root.countLeaves(); // still 1
+console.log('should be 1: ', root.addChild(new Tree()));
+
+root.addChild(new Tree());
+root.children[0].addChild(new Tree());
+root.children[0].addChild(new Tree());
+root.children[0].children[0].addChild(new Tree());
+root.countLeaves(); //3
+console.log('should be 3: ', root.countLeaves());
