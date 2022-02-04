@@ -18,26 +18,45 @@ var Tree = function(value) {
   this.children = [];
 };
 
+// Tree.prototype.countLeaves = function () {
+//   let leaves = 0;
+//   let innerFunc = (node) => {
+//     // if the node has kids
+//     if (node.children.length) {
+//       //iterate through the children nodes and invoke each child to the recur func
+//       node.children.forEach((eachChild) => {
+//         innerFunc(eachChild);
+//       });
+//     //otherwise if the node doesn't have kids
+//     } else {
+//       //it's the last of it's kind so add one to leaves count
+//       leaves++;
+//     }
+//   }
+//   //invoke innerfunc to the root/head of the tree
+//   console.log(this);
+//   innerFunc(this.value)
+//   return leaves;
+// }
+
 Tree.prototype.countLeaves = function () {
-  let leaves = 0;
-  let innerFunc = (node) => {
-    // if the node has kids
-    if (node.children.length) {
-      //iterate through the children nodes and invoke each child to the recur func
-      node.children.forEach((eachChild) => {
-        innerFunc(eachChild);
-      });
-    //otherwise if the node doesn't have kids
-    } else {
-      //it's the last of it's kind so add one to leaves count
-      leaves++;
+  var counter = 0;
+  function innerFunc(node) {
+    //if the node doesn't have children
+    if (node.children.length === 0) {
+      //add one to counter
+      counter++;
+      return;
     }
-  }
-  //invoke innerfunc to the root/head of the tree
-  console.log(this);
-  innerFunc(this.value)
-  return leaves;
-}
+    node.children.forEach((eachKid) => {
+      innerFunc(eachKid);
+    })
+  };
+  //IIFE the innerFunc to the tree instantiation
+  innerFunc(this);
+  return counter;
+};
+
 
 //TEST SUITE
 
