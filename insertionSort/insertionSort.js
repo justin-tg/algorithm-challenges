@@ -6,7 +6,7 @@
  * where that element belongs. It does this until it gets to the end of the array.
  *
  * Insertion sort should be implemented as a stable sort. This means that equal elements
- * should retain their relative order. Numbers, as primitives, give us no way to check this,
+ * should retain their relative order. valbers, as primitives, give us no way to check this,
  * so we'll be sorting objects with a value field, on which they will be sorted, like so:
  *
  * `[{value: 10}, {value: 5, order: 1}, {value: 5, order: 2}]`
@@ -34,7 +34,7 @@
 // yields [{value: 1}, {value: 2}, {value: 3}]
 
 // This function is to help you test, and should not be incorporated in your solution
-// It will transform an array of numbers into an array of valid objects.
+// It will transform an array of valbers into an array of valid objects.
 var testingTransform = function(array) {
   var transform = [];
   for (var i = 0; i < array.length; i++) {
@@ -44,14 +44,14 @@ var testingTransform = function(array) {
 };
 
 var insertionSort = function(array) {
-  for (let i = 1; i < array.length; i++) {
-    let num = array[i];
-    let hole = i;
-    while (hole && num < array[hole - 1]) {
+  for (var i = 1; i < array.length; i++) {
+    var val = array[i];
+    var hole = i;
+    while (hole && val < array[hole - 1]) {
       array[hole] = array[hole - 1];
-      hole-= 1;
+      hole -= 1;
     }
-    array[hole] = num;
+    array[hole] = val;
   }
   return array;
 };

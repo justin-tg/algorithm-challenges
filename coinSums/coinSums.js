@@ -25,8 +25,28 @@ vis: miro
 impl:
 */
 
-var makeChange = function(total) {
-
+var makeChange = function(total, coins) {
+  //count the number of valid coin combinations
+  var counter = 0;
+  coins.sort(/*callback*/);
+  (function recurse (index, remainder) {
+    var coin = coins[index];
+    //base case
+    if (index === 0) {
+      //if the remainder divides evenly by the coin then you havea  valid solution
+      remainder % coin === 0 && counter++;
+      return;
+    }
+    //recursive case
+    //while there is still value unacounted for recurse through other possible coin combinations
+    while (remainder >= 0) {
+      //invoke the recursive function to the next coin and the remainder
+      recurse(index-1, remainder);
+      //decriment the remainder by the value of the coin
+      remainder -= coin;
+    }
+  }) (coins.length-1, total);
+  return counter;
 };
 
 //TEST SUITE
