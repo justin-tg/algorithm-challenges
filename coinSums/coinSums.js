@@ -25,16 +25,21 @@ vis: miro
 impl:
 */
 
-var makeChange = function(total, coins) {
+
+var makeChange = function(total) {
+  const coins = [1,2,5,10,20,50,100,200];
   //count the number of valid coin combinations
-  var counter = 0;
-  coins.sort(/*callback*/);
-  (function recurse (index, remainder) {
+  let counter = 0;
+  // coins.sort(/*callback*/);
+  let recurse = (index, remainder) => {
     var coin = coins[index];
     //base case
     if (index === 0) {
-      //if the remainder divides evenly by the coin then you havea  valid solution
-      remainder % coin === 0 && counter++;
+      //if the remainder divides evenly by the coin
+      if (remainder % coin === 0) {
+        //valid solution, add 1 to count
+        counter++;
+      }
       return;
     }
     //recursive case
@@ -45,7 +50,8 @@ var makeChange = function(total, coins) {
       //decriment the remainder by the value of the coin
       remainder -= coin;
     }
-  }) (coins.length-1, total);
+  }
+  recurse(coins.length-1, total);
   return counter;
 };
 

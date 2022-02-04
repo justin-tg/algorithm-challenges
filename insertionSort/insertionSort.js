@@ -43,15 +43,29 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array) {
-  for (var i = 1; i < array.length; i++) {
-    var val = array[i];
-    var hole = i;
-    while (hole && val < array[hole - 1]) {
-      array[hole] = array[hole - 1];
-      hole -= 1;
+// let insertionSort = function(array) {
+//   for (let i = 1; i < array.length; i++) {
+//     let val = array[i];
+//     let hole = i;
+//     while (hole && val < array[hole - 1]) {
+//       array[hole] = array[hole - 1];
+//       hole -= 1;
+//     }
+//     array[hole] = val;
+//   }
+//   return transform;
+// };
+
+let insertionSort = function(array) {
+  let length = array.length;
+  for (let i = 0; i < length; i++) {
+    let key = array[i];
+    let j = i - 1;
+    while(j >= 0 && array[j] > key) {
+      array[j + 1] = array[j];
+      j = j - 1;
     }
-    array[hole] = val;
+    array[j + 1] = key;
   }
   return array;
 };
