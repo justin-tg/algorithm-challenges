@@ -128,3 +128,5 @@ root.children[0].addChild(new Tree());
 root.children[0].children[0].addChild(new Tree());
 root.countLeaves(); //3
 console.log('should be 3: ', root.countLeaves());
+
+var test10;

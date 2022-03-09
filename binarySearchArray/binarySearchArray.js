@@ -155,3 +155,5 @@ console.log('should be null', test2); // null
 
 var test3 = binarySearch([4, 5, 6, 7, 8, 9], 5);
 console.log('should be 1: ', test3); //1
+
+var test10;
