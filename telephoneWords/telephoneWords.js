@@ -108,3 +108,5 @@ console.log('first test should be APGJ: ', telephoneWords(test1))
 // 'APGL',
 // ..., // many many more of these
 // 'CSIL']
+
+var test2;

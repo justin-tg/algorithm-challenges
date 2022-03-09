@@ -71,11 +71,11 @@ let insertionSort = function(array) {
 };
 
 
-let test1 = insertionSort([7, 3, 5, 1, 4]);
-console.log('should be [ 1, 3, 4, 5, 7 ]: ', test1);
+// let test1 = insertionSort([7, 3, 5, 1, 4]);
+// console.log('should be [ 1, 3, 4, 5, 7 ]: ', test1);
 
-let test2 = insertionSort([94, 27, 4, 35, 11, 90, 9]);
-console.log('should be [4, 9, 11, 27, 35, 90, 94]: ', test2);
+// let test2 = insertionSort([94, 27, 4, 35, 11, 90, 9]);
+// console.log('should be [4, 9, 11, 27, 35, 90, 94]: ', test2);
 
-let test3 = insertionSort([[1, 100, 2, 43, 21]));
-console.log('should be [1, 2, 21, 43, 100]: ', test3);
+// let test3 = insertionSort([[1, 100, 2, 43, 21]));
+// console.log('should be [1, 2, 21, 43, 100]: ', test3);

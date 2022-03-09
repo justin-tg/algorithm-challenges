@@ -35,6 +35,6 @@ let test2 = powerSet("jump");
 console.log('all subsets: ', test2);
 console.log('expect length to be 16', test2.length);
 
-let test2 = powerSet("spark");
+let test3 = powerSet("spark");
 console.log('all subsets: ', test3);
 console.log('expect length to be 32', test3.length);

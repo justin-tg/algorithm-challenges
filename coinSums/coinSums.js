@@ -64,3 +64,5 @@ console.log('should be 2: ', 2);
 
 var test3 = makeChange(3);
 console.log('should be ??: ', test3);
+
+var test10;

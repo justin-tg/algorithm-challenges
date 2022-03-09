@@ -41,3 +41,5 @@ console.log(test3);
 
 var test4 = allAnagrams('a');
 console.log(`should be ['a']`, test4);
+
+var test10;

@@ -70,4 +70,4 @@ var orderedDeck = function() {
 };
 
 console.log('should be the ordered deck: ', orderedDeck());
-console.log('should be the shuffled deck: ', shuffleDeck(orderedDeck()));
+// console.log('should be the shuffled deck: ', shuffleDeck(orderedDeck()));

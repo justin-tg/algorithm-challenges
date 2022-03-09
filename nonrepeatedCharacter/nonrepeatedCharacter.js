@@ -44,4 +44,4 @@ console.log('should be C:', firstNonRepeatedCharacter('AACBDB'));
 
 console.log('should be null:', firstNonRepeatedCharacter(''));
 
-console.log('should be null:', firstNonRepeatedCharacter('justajusta'));
+// console.log('should be null:', firstNonRepeatedCharacter('justajusta'));

@@ -48,3 +48,5 @@ var quicksort = function(array) {
 //TEST SUITE
 var test1 = quicksort([1, 9, 4, 8, 6, 3, 5]);
 console.log('should be 1, 3, 4, 5, 6, 8, 9', test1);
+
+var test2;
