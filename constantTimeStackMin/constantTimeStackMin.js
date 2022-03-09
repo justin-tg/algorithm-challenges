@@ -1,3 +1,6 @@
+//-------------------------NOT DONE 0/0-------------------------//
+
+
 /*
 Prompt: Write a stack using your preferred instantiation pattern
 Add: Implement a min function that returns the minimum value of all the elements in the stack

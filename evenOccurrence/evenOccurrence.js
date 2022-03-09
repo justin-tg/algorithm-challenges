@@ -1,3 +1,5 @@
+//-------------------------NOT DONE 0/0-------------------------//
+
 /*
  * Find the first item that occurs an even number of times in an array.
  * Remember to handle multiple even-occurrence items and return the first one.
