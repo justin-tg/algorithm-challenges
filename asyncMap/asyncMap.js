@@ -12,31 +12,62 @@
  *
  * Once all the callbacks of the tasks are returned, asyncMap should invoke the callback
  * on the results array.
- *
- *
- * Example:
- *
- * asyncMap([
- *  function(cb){
- *    setTimeout(function(){
- *      cb('one');
- *    }, 200);
- *  },
- *  function(cb){
- *    setTimeout(function(){
- *      cb('two');
- *    }, 100);
- *  }
- * ],
- *  function(results){
- *    // the results array will equal ['one','two'] even though
- *    // the second function had a shorter timeout.
- *    console.log(results); // ['one', 'two']
- * });
- *
- *
- */
+*/
+
+// var asyncMap = function(tasks, callback) {
+//   let resultsArr = [];
+//   //declare result count
+//   let count = 0;
+//   //iterate over tasks
+//   for (var i = 0; i < tasks.length; i++) {
+//     //invoke next task with cb function as param
+//     (function (index) {
+//       tasks[index] (function (val) {
+//         //store cb result at correct spot in resultsArr
+//         resultsArr[index] = val;
+//         //results count plus 1
+//         count++;
+//         //if count = tasks
+//         if (count === tasks.length) {
+//           //call callback on results array to end everything
+//           callback(resultsArr);
+//         }
+//       });
+//     }) (i);
+//   }
+// };
 
 
-var asyncMap = function(tasks, callback) {
+const asyncMap = function(tasks, callback) {
+  let resultsArr = [];
+  let count = 0;
+  for (let i = 0; i < tasks.length; i++) {
+    tasks[i] (function (val) {
+        resultsArr[i] = val;
+        count++;
+        if (count === tasks.length) {
+          callback(resultsArr);
+        }
+      });
+  }
 };
+
+
+//TEST SUITE
+asyncMap([
+ function(cb){
+   setTimeout(function(){
+     cb('one');
+   }, 200);
+ },
+ function(cb){
+   setTimeout(function(){
+     cb('two');
+   }, 100);
+ }
+],
+ function(results){
+   // the results array will equal ['one','two'] even though
+   // the second function had a shorter timeout.
+   console.log(results); // ['one', 'two']
+});

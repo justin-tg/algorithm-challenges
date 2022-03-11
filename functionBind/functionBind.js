@@ -1,59 +1,52 @@
-/*
- * function bind():
- *
- * example 1:
- *
- * var alice = {
- *   name: 'alice',
- *   shout: function(){
- *     alert(this.name);
- *   }
- * }
- * var boundShout = bind(alice.shout, alice);
- * boundShout(); // alerts 'alice'
- * boundShout = bind(alice.shout, {name: 'bob'});
- * boundShout(); // alerts 'bob'
- *
- * example 2:
- *
- * var func = function(a, b){ return a + b };
- * var boundFunc = bind(func, null, 'foo');
- * var result = boundFunc('bar');
- * result === 'foobar'; // true
- *
-*/
+//Bind Function
+const bind = (func, context) => {
+  let prevArgs = Array.prototype.slice.call(arguments, 2);
 
-var bind = function(
-) {
-  // TODO: Your code here
+  return function () {
+    let args = Array.prototype.slice.call(arguments);
+    args  = prevArgs.concat(args);
+    return func.apply(context, args);
+  }
 };
 
-/*
- * Function.prototype.bind:
- *
- * example 1:
- *
- * var alice = {
- *   name: 'alice',
- *   shout: function(){
- *     alert(this.name);
- *   }
- * }
- * var boundShout = alice.shout.bind(alice);
- * boundShout(); // alerts 'alice'
- * boundShout = alice.shout.bind({name: 'bob'});
- * boundShout(); // alerts 'bob'
- *
- * example 2:
- *
- * var func = function(a, b){ return a + b };
- * var boundFunc = func.bind(null, 'foo');
- * var result = boundFunc('bar');
- * result === 'foobar'; // true
- *
-*/
+//Bind Func TEST SUIT
+// function bind():
+var alice = {
+  name: 'alice',
+  shout: function(){
+    alert(this.name);
+  }
+}
 
-Function.prototype.bind = function(
-) {
-  // TODO: Your code here
+var boundShout = bind(alice.shout, alice);
+boundShout(); // alerts 'alice'
+boundShout = bind(alice.shout, {name: 'bob'});
+boundShout(); // alerts 'bob'
+
+var func = function(a, b){ return a + b };
+var boundFunc = bind(func, null, 'foo');
+var result = boundFunc('bar');
+result === 'foobar'; // true
+
+
+//Inheritable Functional Bind Method
+Function.prototype.bind = function(context) {
+  let prevArgs = Array.prototype.slice(arguments, 1);
+  let func = this;
+
+  return function () {
+    let args = Array.prototype.slice.call(arguments);
+    args  = prevArgs.concat(args);
+    return func.apply(context, args);
+  }
 };
+
+// var boundShout = alice.shout.bind(alice);
+// boundShout(); // alerts 'alice'
+// boundShout = alice.shout.bind({name: 'bob'});
+// boundShout(); // alerts 'bob'
+
+// var func = function(a, b){ return a + b };
+// var boundFunc = func.bind(null, 'foo');
+// var result = boundFunc('bar');
+// result === 'foobar'; // true
