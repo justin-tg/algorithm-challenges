@@ -56,19 +56,19 @@ var testingTransform = function(array) {
 //   return array;
 // };
 
-let insertionSort = function(array) {
-  let length = array.length;
-  for (let i = 0; i < length; i++) {
-    let key = array[i];
-    let j = i - 1;
-    while(j >= 0 && array[j] > key) {
-      array[j + 1] = array[j];
-      j = j - 1;
-    }
-    array[j + 1] = key;
-  }
-  return array;
-};
+// let insertionSort = function(array) {
+//   let length = array.length;
+//   for (let i = 0; i < length; i++) {
+//     let key = array[i];
+//     let j = i - 1;
+//     while(j >= 0 && array[j] > key) {
+//       array[j + 1] = array[j];
+//       j = j - 1;
+//     }
+//     array[j + 1] = key;
+//   }
+//   return array;
+// };
 
 
 // let test1 = insertionSort([7, 3, 5, 1, 4]);
@@ -79,3 +79,21 @@ let insertionSort = function(array) {
 
 // let test3 = insertionSort([[1, 100, 2, 43, 21]));
 // console.log('should be [1, 2, 21, 43, 100]: ', test3);
+
+var insertionSort = function(array) {
+  for (let i = 1; i < array.length; i++) {
+    let j = i - 1;
+    let currentElement = array[i];
+    while (j >= 0 && array[j].value > currentElement.value) {
+        array[j+1] = array[j];
+        j--;
+    }
+    array[j+1] = currentElement;
+  }
+  return array;
+};
+
+console.log(insertionSort([{value: 2}, {value: 1}, {value: 3}])); // yields [{value: 1}, {value: 2}, {value: 3}]
+console.log(insertionSort([{value: 10}, {value: 5, order: 1}, {value: 5, order: 2}])); // [{value: 10}, {value: 5, order: 1}, {value:5, order: 2}]
+var array = testingTransform([1, 100, 2, 43, 21]);
+insertionSort(array);

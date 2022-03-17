@@ -10,7 +10,7 @@
  * parent of the 3rd and 4th nodes, and the 2nd node will be the parent of the 5th and
  * 6th nodes. In a specific kind of binary heap, the binary min heap, every node is
  * less than its immediate children:
- * 
+ *
  *          0
  *     1         2
  *   3   4     5   6
@@ -79,9 +79,41 @@ BinaryHeap.prototype.getRoot = function () {
 }
 
 BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
+  this.heap.push(value);
+  let index = this.heap.length - 1;
+  let parentIndex = Math.floor((index - 1) / 2);
+  while (index > 0 && this.compare(this.heap[index], this.heap[parentIndex])) {
+    this.swap(index, parentIndex);
+    index = parentIndex;
+    parentIndex = Math.floor((index - 1) / 2)
+  }
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  this.swap(0, this.heap.length - 1);
+  let originalRoot = this.heap.pop();
+  let index = 0;
+  let childIndex = this.getLesserChildIndex(index);
+  while (childIndex && this.compare(this.heap[childIndex], this.heap[index] )) {
+    this.swap(childIndex, index)
+    index = childIndex;
+    childIndex = this.getLesserChildIndex(index);
+  }
+  return originalRoot
 }
+
+BinaryHeap.prototype.swap = function (index, parentIndex) {
+  let temp = this.heap[index]
+  this.heap[index] = this.heap[parentIndex]
+  this.heap[parentIndex] = temp;
+}
+
+BinaryHeap.prototype.getLesserChildIndex = function (parentIndex) {
+  let childIndecies = [parentIndex * 2 + 1, parentIndex * 2 + 2];
+  if (this.compare(this.heap[childIndecies[0]], this.heap[childIndecies[1]] )) {
+    return childIndecies[0];
+  } else {
+    return childIndecies[1];
+  }
+}
+
