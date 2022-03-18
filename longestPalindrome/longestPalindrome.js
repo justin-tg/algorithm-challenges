@@ -6,18 +6,7 @@
 * whitespace on each side of dad).
 */
 
-// Skeleton
-
-/**
-* Implement a function that finds the longest palindrome in a given string.
-* For example, in the string "My dad is a racecar athlete", the longest
-* palindrome is "a racecar a". Count whitespaces as valid characters. Other
-* palindromes in the above string include "dad", "ete", " dad " (including
-* whitespace on each side of dad).
-*/
-
-
-const findLongestPalindrome = function(sentence) {
+const longestPalindrome = function(sentence) {
   // split sentence into words
   sentence = sentence.split(' ');
   // iterate words and collect the palindromes
@@ -57,11 +46,15 @@ function sortAscendingByLength(a, b) {
   return 0;
 }
 
-// TESTS CASES
+// TESTS SUITE
 let mySentence1 = "racecar are bad hannah"
-let test1 = findLongestPalindrome(mySentence1);
+let test1 = longestPalindrome(mySentence1);
 console.log('Should be racecar: ', test1);
 
 let mySentence2 = "kayak rotator";
-let test2 = findLongestPalindrome(mySentence2);
+let test2 = longestPalindrome(mySentence2);
 console.log('Should be rotator: ', test2);
+
+let mySentence3 = "nan noon is redder";
+let test3 = longestPalindrome(mySentence3);
+console.log('should be redder: ', test3);
