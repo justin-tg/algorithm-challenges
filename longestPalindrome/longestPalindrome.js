@@ -17,12 +17,12 @@
 */
 
 
-function findLongestPalindrome(sentence) {
+const findLongestPalindrome = function(sentence) {
   // split sentence into words
   sentence = sentence.split(' ');
   // iterate words and collect the palindromes
-  var paliArr = [];
-  for (var i = 0; i < sentence.length; i++) {
+  let paliArr = [];
+  for (let i = 0; i < sentence.length; i++) {
   if (isPalindrome(sentence[i]) === true) {
     paliArr.push(sentence[i]);
   }
@@ -34,14 +34,14 @@ function findLongestPalindrome(sentence) {
 }
 
 function reverseString(string) {
-  var reverseString = '';
+  let reverseString = '';
   reverseString += string.split('').reverse().join('');
   return reverseString;
 }
 
 function isPalindrome(word) {
-  var isItAPalindrome = true;
-  var reverseS = reverseString(word);
+  let isItAPalindrome = true;
+  let reverseS = reverseString(word);
     if (reverseS !== word) {
     isItAPalindrome = false;
     }
