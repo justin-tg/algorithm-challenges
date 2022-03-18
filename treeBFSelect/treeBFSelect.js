@@ -1,76 +1,74 @@
-/**
-  *
-  * Implement a `BFSelect` method on this Tree class.
-  *
-  * BFSelect accepts a filter function, calls that function on each of the nodes
-  * in Breadth First order, and returns a flat array of node values of the tree
-  * for which the filter returns true.
-  *
-  * Example:
-  *   var root1 = new Tree(1);
-  *   var branch2 = root1.addChild(2);
-  *   var branch3 = root1.addChild(3);
-  *   var leaf4 = branch2.addChild(4);
-  *   var leaf5 = branch2.addChild(5);
-  *   var leaf6 = branch3.addChild(6);
-  *   var leaf7 = branch3.addChild(7);
-  *   root1.BFSelect(function (value, depth) {
-  *     return value % 2;
-  *   })
-  *   // [1, 3, 5, 7]
-  *
-  *   root1.BFSelect(function (value, depth) {
-  *     return depth === 1;
-  *   })
-  *   // [2, 3]
-  *
-  */
+// // * Implement a `BFSelect` method on this Tree class
+// // * BFSelect accepts a filter function, calls that function on each of the nodes
+// // * in Breadth First order, and returns a flat array of node values of the tree
+// // * for which the filter returns true
 
-/*
- * Basic tree that stores a value.
- */
+// //Basic tree that stores a value.
+// var Tree = function(value) {
+//   this.value = value;
+//   this.children = [];
+// };
+
+// //Your code here...
+// //Return array of values which the function filter(value, depth) returns true
 
 var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
 
-
-
-const Queue = function() {
-  let storage = [];
-
-  this.push = function(item) {
-    storage.push(item);
-  };
-
-  this.pop = function() {
-    return storage.shift();
-  };
-
-  this.length = function() {
-    return storage.length;
-  }
+var Queue = function() {
+  this.storage = {};
+  this.firstIn = undefined;
+  this.index = 0;
 };
 
+Queue.prototype.add = function(tree, depth) {
+  this.storage[this.index] = {tree: tree, depth: depth + 1};
+  if (this.firstIn === undefined) {
+    this.firstIn = this.index;
+  }
+  this.index++;
+};
 
-Tree.prototype.BFSelect = function(filter) {
-  let queue = new Queue();
-  let results = [];
-  queue.push({tree: this, depth: 0});
-  while (queue.length()) {
-    var item = queue.pop();
-    var tree = item.tree;
-    var depth = item.depth;
-    if (filter(tree, depth)) {
-      results.push(item);
-    }
-    for (var i = 0; i < tree.children.length; i++) {
-      queue.push({tree: tree.children[i], depth: depth + 1});
-    }
+Queue.prototype.leave = function() {
+  let leaving = this.storage[this.firstIn];
+  delete this.storage[this.firstIn]
+
+  if (this.firstIn < this.index) {
+    this.firstIn++
+  }
+  if (Object.keys(this.storage).length === 0) {
+    this.index = 0;
+    this.firstIn = undefined;
   }
 
-  return results;
+  return leaving;
+};
+
+Tree.prototype.BFSelect = function(filter) {
+  // return an array of values for which the function filter(value, depth) returns true
+  let passes = [];
+  let depth = 0;
+  let breadthNodes = new Queue();
+  if (filter(this.value, depth)) passes.push(this.value);
+
+  for (let i = 0; i < this.children.length; i++) {
+    let child = this.children[i];
+    breadthNodes.add(child, depth);
+  }
+
+  while (Object.keys(breadthNodes.storage).length !== 0) {
+    let dequeing = breadthNodes.leave()
+    let tree = dequeing.tree;
+    for (let i = 0; i < tree.children.length; i++) {
+      let child = tree.children[i];
+      breadthNodes.add(child, dequeing.depth);
+    }
+    if (filter(tree.value, dequeing.depth)) passes.push(tree.value);
+  }
+
+  return passes;
 };
 
 /**
@@ -140,7 +138,7 @@ var leaf7 = branch3.addChild(7);
 let test1 = root1.BFSelect(function (value, depth) {
   return value % 2;
 })
-console.log(test1);// [1, 3, 5, 7]
+console.log(test1)// [1, 3, 5, 7]
 
 let test2 = root1.BFSelect(function (value, depth) {
   return depth === 1;
