@@ -7,7 +7,14 @@
  * Extra credit: Make your function handle negative numbers.
  */
 
-
 var largestProductOfThree = function(array) {
-  // TODO: everything
+  const sorted = array.slice().sort(function(a,b) {
+      return a - b;
+  });
+
+  let n = sorted.length;
+  let firstProduct = sorted[0] * sorted[1] * sorted[n - 1];
+  let lastProduct = sorted[n - 3] * sorted[n - 2] * sorted[n - 1];
+
+  return Math.max(firstProduct, lastProduct);
 };

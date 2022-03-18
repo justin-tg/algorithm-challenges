@@ -30,22 +30,83 @@
  * You will need a doubly-linked list (provided).
  */
 
+/*
+ * Design and implement an LRU, or Least Recently Used, cache.
+ *
+ * An LRU cache gives O(1) get(key) and set(key, val) operations,
+ * much like a hashtable, but once it reaches its limit for stored
+ * number of items, removes the least recently used (i.e. the oldest
+ * by get-date) item from the cache in O(1) time.
+ *
+ * For instance:
+ *
+ * var cache = new LRUCache(3); // limit of 3 items
+ * cache.set("item1", 1);
+ * cache.set("item2", 2);
+ * cache.set("item3", 3);
+ * cache.set("item4", 4);
+ *
+ * cache.get("item3") //=> 3
+ * cache.get("item2") //=> 2
+ * // item1 was removed because it was the oldest item by insertion/usage
+ * cache.get("item1") //=> null
+ *
+ * // item4 is removed to make room, because it is the oldest by usage,
+ * // which takes priority.
+ * cache.set("item5", 5);
+ *
+ * // item3 is also removed, because it was retrieved before item2 was
+ * // last retrieved.
+ * cache.set("item6", 6);
+ *
+ * You will need a doubly-linked list (provided).
+ */
+
 var LRUCache = function (limit) {
+  this._cache = new List();
+  this._map = {};
+  this._size = 0;
+  this._limit = limit;
 };
 
 var LRUCacheItem = function (val, key) {
+  this.key = key;
+  this.value = value;
+  this.node = null;
 };
 
 LRUCache.prototype.size = function () {
 };
 
 LRUCache.prototype.get = function (key) {
+  if (!(key in this._map)) {
+    return null;
+  }
+  let item = this._map[key];
+  this._cache.moveToFront(item.node);
+
+  return item.value;
 };
 
 LRUCache.prototype.set = function (key, val) {
+  let item;
+  if (key in this._map) {
+    item = this._map[key];
+    item.value = val;
+    this._cache.moveToFront(item.node);
+  } else {
+    item = new LRUCacheItem(key, val);
+    ite.node = this._cache.unshift(item);
+    this._map[key] = item;
+    this._size++;
+
+    if (this._size > this._limit) {
+      let oldest = this._cache.pop();
+      delete this._map[oldest.key];
+      this._size--;
+    }
+  }
 };
-
-
 
 var List = function () {
   this.head = null;
@@ -170,4 +231,3 @@ ListNode.prototype.delete = function () {
   if (this.prev) { this.prev.next = this.next; }
   if (this.next) { this.next.prev = this.prev; }
 };
-

@@ -17,14 +17,33 @@
  * -> ["", "j", "ju", "jm", "jp", "jmu", "jmp", "jpu", "jmpu", "u", "m", "p", "mu", "mp", "pu", "mpu"]
  */
 
+// var powerSet = function(str) {
+//   let inputArr = str.split('');
+//   return inputArr.reduce(
+//     (subsets, value) => subsets.concat(
+//      subsets.map(set => [value,...set])
+//     ),
+//     [[]]
+//   );
+// };
+
 var powerSet = function(str) {
-  let inputArr = str.split('');
-  return inputArr.reduce(
-    (subsets, value) => subsets.concat(
-     subsets.map(set => [value,...set])
-    ),
-    [[]]
-  );
+  let orderedCombinations = [];
+  let orderedLetters = str.split('')
+  orderedLetters = [...new Set(orderedLetters)].sort();
+
+  var helperFunc = function(add = '', startingIndex = 0) {
+    orderedCombinations.push(add);
+    if (startingIndex === orderedLetters.length) {
+      return;
+    }
+    for (let i = startingIndex; i < orderedLetters.length; i++) {
+      let letter = orderedLetters[i];
+      helperFunc(add + letter, i + 1);
+    }
+  }
+  helperFunc();
+  return orderedCombinations;
 };
 
 let test1 = powerSet("abc");

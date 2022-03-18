@@ -24,10 +24,10 @@ Function.prototype.bind = function(target, ...Args) {
 //   }
 // }
 
-var boundShout = bind(alice.shout, alice);
-boundShout(); // alerts 'alice'
-boundShout = bind(alice.shout, {name: 'bob'});
-boundShout(); // alerts 'bob'
+// var boundShout = bind(alice.shout, alice);
+// boundShout(); // alerts 'alice'
+// boundShout = bind(alice.shout, {name: 'bob'});
+// boundShout(); // alerts 'bob'
 
 // Function.prototype.bind:
 // example 1:
