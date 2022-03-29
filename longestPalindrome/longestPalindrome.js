@@ -1,4 +1,4 @@
-/**
+/*
 * Implement a function that finds the longest palindrome in a given string.
 * For example, in the string "My dad is a racecar athlete", the longest
 * palindrome is "a racecar a". Count whitespaces as valid characters. Other
@@ -6,54 +6,82 @@
 * whitespace on each side of dad).
 */
 
-const longestPalindrome = function(sentence) {
-  // split sentence into words
-  sentence = sentence.split(' ');
-  //if there is only one word in sentence then return empty string
-  if (sentence.length < 2) {
-    if (isPalindrome(sentence[0])) {
-      return sentence[0];
-    }
-    return '';
-  }
-  // iterate words and collect the palindromes
-  let paliArr = [];
-  for (let i = 0; i < sentence.length; i++) {
-    if (isPalindrome(sentence[i]) === true) {
-      paliArr.push(sentence[i]);
-    }
-  // sort the list of palindromes by word length
-  }
-  paliArr = paliArr.sort(sortAscendingByLength);
-  // return the largest item in the sorted list
-  let result = paliArr[paliArr.length -1];
-  result = (" " + result.trim() + " ");
-  return result;
-}
+// const longestPalindrome = function(sentence) {
+//   // split sentence into words
+//   sentence = sentence.split(' ');
+//   //if there is only one word in sentence then return empty string
+//   if (sentence.length < 2) {
+//     if (isPalindrome(sentence[0])) {
+//       return sentence[0];
+//     }
+//     return '';
+//   }
+//   // iterate words and collect the palindromes
+//   let paliArr = [];
+//   for (let i = 0; i < sentence.length; i++) {
+//     if (isPalindrome(sentence[i]) === true) {
+//       paliArr.push(sentence[i]);
+//     }
+//   // sort the list of palindromes by word length
+//   }
+//   paliArr = paliArr.sort(sortAscendingByLength);
+//   // return the largest item in the sorted list
+//   let result = paliArr[paliArr.length -1];
+//   result = (" " + result.trim() + " ");
+//   return result;
+// }
 
-function reverseString(string) {
-  let reverseString = '';
-  reverseString += string.split('').reverse().join('');
-  return reverseString;
-}
+// function reverseString(string) {
+//   let reverseString = '';
+//   reverseString += string.split('').reverse().join('');
+//   return reverseString;
+// }
 
-function isPalindrome(word) {
-  let isItAPalindrome = true;
-  let reverseS = reverseString(word);
-    if (reverseS !== word) {
-    isItAPalindrome = false;
+// function isPalindrome(word) {
+//   let isItAPalindrome = true;
+//   let reverseS = reverseString(word);
+//     if (reverseS !== word) {
+//     isItAPalindrome = false;
+//     }
+//     return isItAPalindrome;
+// }
+
+// function sortAscendingByLength(a, b) {
+//   if (a.length > b.length) {
+//     return 1;
+//   } else if (a.length < b.length) {
+//     return -1;
+//   }
+//   return 0;
+// }
+
+const longestPalindrome = function (string) {
+
+  let palindrome = function(a, b, string) {
+    while(string.charAt(a) === string.charAt(b) && (a >=0 && b < string.length)) {
+      a--;
+      b++;
     }
-    return isItAPalindrome;
-}
+    return string.substring(a+1, b);
+  };
 
-function sortAscendingByLength(a, b) {
-  if (a.length > b.length) {
-    return 1;
-  } else if (a.length < b.length) {
-    return -1;
+  let longest = '';
+
+  for(let i = 0; i < string.length; i++) {
+    let test = '';
+    let c = string.charAt(i);
+    if(string.charAt(i+1) === c) {
+      test = palindrome(i, i+1, string);
+      i++;
+    } else if(string.charAt(i+2) === c) {
+      test = palindrome(i, i+2, string);
+    }
+    if(test.length > longest.length) { longest = test }
   }
-  return 0;
-}
+
+  return longest;
+};
+
 
 // TESTS SUITE
 let mySentence1 = "racecar are bad hannah"
